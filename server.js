@@ -1,34 +1,25 @@
 const express = require("express");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 
-// initialize server
 const app = express();
-
-// set up port
 const PORT = process.env.PORT || 3001;
 
-// make sure we can use JSON
+app.use(morgan("dev"));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// make public folder static
 app.use(express.static("public"));
 
-// code added for Mongo Atlas deployment
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/Workout-Tracker",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }
-);
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
-// routes
-app.use(require("./routes/api-routes.js"));
-app.use(require("./routes/html-routes.js"));
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
-app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+app.listen(PORT, function () {
+  console.log(`App listening on Port ${PORT}!`);
 });
