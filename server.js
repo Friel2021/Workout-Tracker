@@ -1,20 +1,21 @@
 const express = require("express");
-const logger = require("morgan");
 const mongoose = require("mongoose");
-const router = require("./routes/api.js");
 
-const PORT = process.env.PORT || 3000;
-
+// initialize server
 const app = express();
 
-app.use(logger("dev"));
+// set up port
+const PORT = process.env.PORT || 3001;
 
+// make sure we can use JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// make public folder static
 app.use(express.static("public"));
 
-let db = mongoose.connect(
+// code added for Mongo Atlas deployment
+mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/Workout-Tracker",
   {
     useNewUrlParser: true,
@@ -24,11 +25,10 @@ let db = mongoose.connect(
   }
 );
 
-app.use(router);
-require("./routes/public.js")(app);
+// routes
+app.use(require("./routes/api-routes.js"));
+app.use(require("./routes/html-routes.js"));
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
-
-module.exports = db;
