@@ -6,10 +6,10 @@ A web app for tracking data and stats for your workouts.
 
 With workout tracker a user can pickup where they left off on their last workout or log a new workout. The user can add multiple exercises to their workout before completing the workout.
 
-When a user visits their dashboard, they are presented with four charts:
+When a user visits their dashboard, they are presented with two charts:
 
-* Graph that tracks how much time in minutes you spent working out weekly.
-* Graph that tracks how much weight in pounds you worked out with for that given day.
+* A graph that tracks your workout duration in minutes spent working out weekly.
+* A graph that tracks how much weight in pounds you worked out with for that given day.
 
 
 ## Technologies and Features
