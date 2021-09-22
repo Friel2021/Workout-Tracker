@@ -2,7 +2,7 @@
 
 ## Description
 
-A web app for tracking your workouts day in and day out.
+A web app for tracking data and stats for your workouts.
 
 With workout tracker a user can pickup where they left off on their last workout or log a new workout. The user can add multiple exercises to their workout before completing the workout.
 
